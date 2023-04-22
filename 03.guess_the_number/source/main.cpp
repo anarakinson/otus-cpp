@@ -36,6 +36,10 @@ int main(int argc, char **argv) {
             // check "-level" argument
             else if (arg == "-level") {
                 int level = std::stoi(argv[i+1]);
+                if (level > 3 || level <= 0) {
+                    std::cout << "error: level must be in range (1, 3)" << std::endl;
+                    return 1; 
+                }
                 switch (level) {
                     case 1: max_val = 10; break;
                     case 2: max_val = 50; break;
