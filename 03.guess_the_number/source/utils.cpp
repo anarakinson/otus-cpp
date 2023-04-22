@@ -5,6 +5,8 @@
 
 #include "utils.h"
 
+
+// define separator corresponding to the system
 inline char separator() {
 #ifdef _WIN32
     return '\\';
