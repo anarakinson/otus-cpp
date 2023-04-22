@@ -32,6 +32,10 @@ int main(int argc, char **argv) {
             // check "-max" argument
             if (arg == "-max") {
                 max_val = std::stoi(argv[i+1]);
+                if (max_val <= 0) {
+                    std::cout << "error: maximum value must be positive" << std::endl;
+                    return 1; 
+                }
             } 
             // check "-level" argument
             else if (arg == "-level") {
