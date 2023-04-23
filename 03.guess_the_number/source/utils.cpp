@@ -36,7 +36,7 @@ std::string parse_dir_path(const std::string &app_path) {
 
 
 // save results to file
-void save_results(std::string path, std::string username, int score) {
+void save_results(const std::string &path, const std::string &username, int score) {
     
     // load old results
     std::map<std::string, int> results = load_results(path);
@@ -57,7 +57,7 @@ void save_results(std::string path, std::string username, int score) {
 
 
 // load results from file to map with unique usernames and best results
-std::map<std::string, int> load_results(std::string path) {
+std::map<std::string, int> load_results(const std::string &path) {
 
     std::map<std::string, int> output;
 
@@ -94,7 +94,7 @@ std::map<std::string, int> load_results(std::string path) {
 
 
 // show results on standart output
-void show_results(std::string path) {
+void show_results(const std::string &path) {
     
     // load results
     std::map<std::string, int> results = load_results(path);

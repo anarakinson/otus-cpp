@@ -21,7 +21,7 @@ int get_random_num(int max_value) {
 
     
 // start game main loop
-void game_loop(int max_value, std::string dir_path) {
+void game_loop(int max_value, const std::string &dir_path) {
     
     // input user's name
     std::string username;
