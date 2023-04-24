@@ -14,6 +14,7 @@ int main(int argc, char **argv) {
 
     std::string app_path{argv[0]};
     std::string dir_path = parse_dir_path(app_path);
+    
     // parse arguments
     if (argc >= 2) {
         for (int i=0; i<argc; ++i) {
