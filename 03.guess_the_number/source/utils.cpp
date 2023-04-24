@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <charconv>
 
 #include "utils.h"
 
@@ -107,3 +108,9 @@ void show_results(const std::string &path) {
 
 }
 
+
+// check if string is convertable to int
+bool is_number(const std::string &str) {
+    bool success = strspn( str.c_str(), "-.0123456789" ) == str.size();
+    return success;
+}

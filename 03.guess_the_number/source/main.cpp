@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+
 #include "gameloop.h"
 #include "utils.h"
 
@@ -8,6 +9,7 @@
 int main(int argc, char **argv) {
     
     int max_val = 100;
+    int level = 0;
     int argument_counter = 0;
 
     std::string app_path{argv[0]};
@@ -31,29 +33,40 @@ int main(int argc, char **argv) {
             }
             // check "-max" argument
             if (arg == "-max") {
-                max_val = std::stoi(argv[i+1]);
-                if (max_val <= 0) {
-                    std::cout << "error: maximum value must be positive" << std::endl;
+                // check if argument is number and convert it
+                std::string next_arg{argv[i+1]};
+                bool success = is_number(next_arg);
+                if (success) {
+                    max_val = stoi(next_arg);
+                }
+                if (!success || (success && max_val <= 0)) {
+                    std::cout << "error: maximum value must be positive number" << std::endl;
                     return 1; 
                 }
             } 
             // check "-level" argument
             else if (arg == "-level") {
-                int level = std::stoi(argv[i+1]);
-                if (level > 3 || level <= 0) {
-                    std::cout << "error: level must be in range (1, 3)" << std::endl;
-                    return 1; 
+                // check if argument is number and convert it                
+                std::string next_arg{argv[i+1]};
+                bool success = is_number(next_arg);
+                if (success) {
+                    level = stoi(next_arg);
+                    switch (level) {
+                        case 1: max_val = 10; break;
+                        case 2: max_val = 50; break;
+                        case 3: max_val = 100; break;
+                    }
                 }
-                switch (level) {
-                    case 1: max_val = 10; break;
-                    case 2: max_val = 50; break;
-                    case 3: max_val = 100; break;
+                if (!success || (success && (level > 3 || level <= 0))) {
+                    std::cout << "error: level must be number in range (1, 3)" << std::endl;
+                    return 1; 
                 }
             }
         }
     }
     /* ------------------------------------ */
     // start game loop
+    std::cout << "start" << std::endl;
     game_loop(max_val, dir_path);
     show_results(dir_path);
     return 0;

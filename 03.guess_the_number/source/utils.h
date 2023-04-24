@@ -3,7 +3,8 @@
 #include <string>
 #include <map>
 
-void save_results(const std::string&, const std::string&, int);
-void show_results( const std::string&);
-std::string parse_dir_path(const std::string&);
-std::map<std::string, int> load_results(const std::string&);
+void save_results(const std::string &, const std::string &, int);
+void show_results( const std::string &);
+std::string parse_dir_path(const std::string &);
+std::map<std::string, int> load_results(const std::string &);
+bool is_number(const std::string &);
