@@ -34,11 +34,15 @@ int main(int argc, char **argv) {
             }
             // check "-max" argument
             if (arg == "-max") {
-                // check if argument is number and convert it
-                std::string next_arg{argv[i+1]};
+                // check if argument is number and not null 
+                std::string next_arg{""};
+                if (argv[i+1] != NULL) {
+                    next_arg = argv[i+1];
+                };
                 bool success = is_number(next_arg);
+                // and convert it
                 if (success) {
-                    max_val = stoi(next_arg);
+                    max_val = stol(next_arg);
                 }
                 if (!success || (success && max_val <= 0)) {
                     std::cout << "error: maximum value must be positive number" << std::endl;
@@ -47,11 +51,15 @@ int main(int argc, char **argv) {
             } 
             // check "-level" argument
             else if (arg == "-level") {
-                // check if argument is number and convert it                
-                std::string next_arg{argv[i+1]};
+                // check if argument is number and not null      
+                std::string next_arg{""};
+                if (argv[i+1] != NULL) {
+                    next_arg = argv[i+1];
+                };
                 bool success = is_number(next_arg);
+                // and convert it
                 if (success) {
-                    level = stoi(next_arg);
+                    level = stol(next_arg);
                     switch (level) {
                         case 1: max_val = 10; break;
                         case 2: max_val = 50; break;

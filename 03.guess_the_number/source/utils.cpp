@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <charconv>
+#include <cstring>
 
 #include "utils.h"
 
@@ -25,7 +26,7 @@ std::string parse_dir_path(const std::string &app_path) {
     std::string word = "";
     // split to names without the last name
     for (const char &ch : app_path) {
-        if (ch == '/' || ch == '\\') {
+        if (ch == separator()) {
             dir_path = dir_path + word;
             word = "";
         }
@@ -112,5 +113,5 @@ void show_results(const std::string &path) {
 // check if string is convertable to int
 bool is_number(const std::string &str) {
     bool success = strspn(str.c_str(), "-.0123456789") == str.size();
-    return success;
+    return success && !str.empty();
 }
