@@ -27,6 +27,8 @@ class Parser {
 
     ASTNode *prim();
 
+    // ASTNode *brace();
+
     Lexer &lexer_;
     Lexer::Token tok_;
 };

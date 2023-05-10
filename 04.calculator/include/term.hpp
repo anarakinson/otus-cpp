@@ -5,20 +5,21 @@
 
 #include "astnode.hpp"
 
-class Add : public ASTNode {
+
+class Mul : public ASTNode {
   public:
-    Add(ASTNode *lhs, ASTNode *rhs):
-        ASTNode("+", lhs, rhs) {
+    Mul(ASTNode *lhs, ASTNode *rhs):
+        ASTNode("*", lhs, rhs) {
           if (lhs == nullptr || rhs == nullptr) {
             std::cout << "error: incorrect input" << std::endl;
           }
         }
 };
 
-class Sub : public ASTNode {
+class Div : public ASTNode {
   public:
-    Sub(ASTNode *lhs, ASTNode *rhs):
-        ASTNode("-", lhs, rhs) {
+    Div(ASTNode *lhs, ASTNode *rhs):
+        ASTNode("/", lhs, rhs) {
           if (lhs == nullptr || rhs == nullptr) {
             std::cout << "error: incorrect input" << std::endl;
           }
