@@ -6,15 +6,19 @@
 
 using Token = Lexer::Token;
 
-ASTNode *Parser::parse() { return expr(); }
+ASTNode *Parser::parse() { 
+    return expr(); 
+    // if (problem) { return {}; }
+}
 
 void Parser::next_token() {
     prev_tok_ = tok_;
     tok_ = lexer_.next_token(); 
     if (
-        (tok_ == prev_tok_) 
+        (tok_ == prev_tok_)
     ) {
         std::cout << "error!" << std::endl;
+        problem = true;
     }
 }
 
@@ -77,6 +81,8 @@ ASTNode *Parser::prim() {
     ASTNode *node = nullptr;
     next_token();
     switch (tok_) {
+    case Token::Operator:
+        std::cout << "error!" << std::endl;
     case Token::Number:
         node = new Number(lexer_.get_number());
         break;

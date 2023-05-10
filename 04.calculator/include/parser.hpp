@@ -29,6 +29,7 @@ class Parser {
 
     // ASTNode *brace();
 
+    bool problem = false;
     Lexer &lexer_;
     Lexer::Token tok_;
     Lexer::Token prev_tok_;
