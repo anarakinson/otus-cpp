@@ -6,9 +6,9 @@
 
 using Token = Lexer::Token;
 
+bool problem;
 ASTNode *Parser::parse() { 
     return expr(); 
-    // if (problem) { return {}; }
 }
 
 void Parser::next_token() {
@@ -83,6 +83,8 @@ ASTNode *Parser::prim() {
     switch (tok_) {
     case Token::Operator:
         std::cout << "error!" << std::endl;
+        problem = true;
+        break;
     case Token::Number:
         node = new Number(lexer_.get_number());
         break;
