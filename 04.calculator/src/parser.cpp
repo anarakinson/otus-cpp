@@ -2,12 +2,21 @@
 #include "number.hpp"
 #include "expr.hpp"
 #include "term.hpp"
+#include <iostream>
 
 using Token = Lexer::Token;
 
 ASTNode *Parser::parse() { return expr(); }
 
-void Parser::next_token() { tok_ = lexer_.next_token(); }
+void Parser::next_token() {
+    prev_tok_ = tok_;
+    tok_ = lexer_.next_token(); 
+    if (
+        (tok_ == prev_tok_) 
+    ) {
+        std::cout << "error!" << std::endl;
+    }
+}
 
 ASTNode *Parser::expr() {
     // parse addition and subsctruction
@@ -28,6 +37,10 @@ ASTNode *Parser::expr() {
             }
             break;
         }
+        case Token::Lbrace: {
+            std::cout << "lbrace" << std::endl;
+        }
+        break;
         default:
             return root;
         }
@@ -53,12 +66,6 @@ ASTNode *Parser::term() {
             }
             break;
         }
-        // case Token::Lbrace: {
-
-        // }
-        // case Token::Rbrace: {
-            
-        // }
         default:
             return root;
         }

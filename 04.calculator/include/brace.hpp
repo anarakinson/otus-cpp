@@ -8,12 +8,24 @@
 
 class Lbrace : public ASTNode {
   public:
-    Mul(ASTNode *lhs, ASTNode *rhs):
-        ASTNode("*", lhs, rhs) {}
+    Lbrace(std::string val)
+        : ASTNode(val)
+        , val_(val) {}
+
+    std::string value() const { return val_; }
+
+  private:
+    std::string val_;
 };
 
 class Rbrace : public ASTNode {
   public:
-    Div(ASTNode *lhs, ASTNode *rhs):
-        ASTNode("/", lhs, rhs) {}
+    Rbrace(std::string val)
+        : ASTNode(val)
+        , val_(val) {}
+
+    std::string value() const { return val_; }
+
+  private:
+    std::string val_;
 };

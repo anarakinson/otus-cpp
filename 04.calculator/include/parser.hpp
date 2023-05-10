@@ -31,4 +31,5 @@ class Parser {
 
     Lexer &lexer_;
     Lexer::Token tok_;
+    Lexer::Token prev_tok_;
 };
