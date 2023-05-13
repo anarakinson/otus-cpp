@@ -18,6 +18,8 @@ class Parser {
 
     ASTNode *parse();
 
+    bool is_problem() { return problem; }
+
   private:
     void next_token();
 

@@ -22,6 +22,10 @@ int main() {
     Parser parser(lexer);
 
     ASTNode *ast = parser.parse();
+    bool problem = parser.is_problem();
+    if (problem) {
+        return 1;
+    }
     if (ast) {
         ast->print(std::cout);
     }
