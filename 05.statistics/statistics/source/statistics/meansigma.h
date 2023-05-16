@@ -13,7 +13,8 @@ public:
         m_selection.push_back(next);
 	}
 
-	double eval() const override;
+	double compute_mean() const;
+	double eval() const override { return compute_mean(); }
 	const char * name() const override { return "mean"; }
 
 protected:
