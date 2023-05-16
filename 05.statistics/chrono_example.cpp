@@ -71,7 +71,7 @@ void run_test_suite(size_t iteration_count) {
 						return 1;
 					return 0;
 				});
-		}
+			}
 		// Take an end time
 		auto end_time = std::chrono::system_clock::now();
 		// Calculate a duration
