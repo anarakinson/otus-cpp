@@ -3,7 +3,7 @@
 #include <vector>
 
 
-double Perc90::eval() const {
+double Perc::eval() const {
     std::vector selection = m_selection;
     std::sort(selection.begin(), selection.end());
     size_t count = selection.size();

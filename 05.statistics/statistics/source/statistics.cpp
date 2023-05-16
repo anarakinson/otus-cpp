@@ -16,8 +16,8 @@ int main() {
 	statistics[1] = new Max{};
 	statistics[2] = new Mean{};
 	statistics[3] = new Sigma{};
-	statistics[4] = new Perc90{};
-	statistics[5] = new Perc95{};
+	statistics[4] = new Perc{90};
+	statistics[5] = new Perc{95};
 
 	double val = 0;
 	while (std::cin >> val) {
