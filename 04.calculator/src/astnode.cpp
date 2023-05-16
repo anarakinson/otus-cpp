@@ -9,11 +9,7 @@ ASTNode::ASTNode(const std::string &repr)
 ASTNode::ASTNode(const std::string &repr, ASTNode *lhs, ASTNode *rhs)
     : repr_(repr)
     , lhs_{lhs}
-    , rhs_{rhs} {
-        if (lhs == nullptr || rhs == nullptr || lhs == '\0' || rhs == '\0') {
-            // std::cout << "error: incorrect input" << std::endl;
-        }
-    }
+    , rhs_{rhs} {}
 
 ASTNode::~ASTNode() {
     delete lhs_;
