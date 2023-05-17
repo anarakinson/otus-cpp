@@ -16,14 +16,8 @@ public:
 	}
 
 	double eval() const override;
+	const char * name() const override; 
 
-	const char * name() const override { 
-        std::string str_name = "perc" + std::to_string(m_perc);
-        char* char_array = new char[str_name.length() + 1];
-        // strcpy_s(char_array, str_name.c_str());
-        strcpy_s(char_array, sizeof(char_array), str_name.c_str());
-        return char_array; 
-    }
 
 private:
 	std::vector<double> m_selection;
