@@ -1,6 +1,7 @@
 #pragma once 
 
 
+// basic abstract class
 class IStatistics {
 public:
 	virtual ~IStatistics() {}
