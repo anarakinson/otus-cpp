@@ -17,8 +17,10 @@ public:
 	double eval() const override { return compute_mean(); }  // return mean
 	const char * name() const override { return "mean"; }
 
-protected:
+private:
 	std::vector<double> m_selection;     // vector to store values
+
+friend class Sigma;
 };
 
 
