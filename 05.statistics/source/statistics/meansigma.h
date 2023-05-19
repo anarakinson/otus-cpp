@@ -22,7 +22,7 @@ public:
 
 private:
 	unsigned long counter = 0;
-	int m_sum = 0;
+	double m_sum = 0;
 
 friend class Sigma;
 };

@@ -14,3 +14,4 @@ double Sigma::eval() const {
     }
     double res = sqrt(var / counter);     // compute standard deviation
     return res;
+}
