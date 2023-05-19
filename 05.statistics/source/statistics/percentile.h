@@ -20,12 +20,13 @@ public:
 
 	void set_name(int);
 	double eval() const override;
-	const char * name() const override { return m_name; }
+	const char * name() const override { return m_name.c_str(); }
 
 
 private:
 	std::vector<double> m_selection;     // vector to store values
     int m_perc;                          // percentile value
-	const char * m_name;                 // store name
+	// const char * m_name;                 // store name
+	std::string m_name;
 };
 

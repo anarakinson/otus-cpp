@@ -12,9 +12,5 @@ double Perc::eval() const {
 }
 
 void Perc::set_name(int perc) { 
-    std::string str_name = "perc" + std::to_string(perc);  // "perc" + percentile value
-    char* char_array = new char[str_name.length() + 1];      // cast to char array
-    // strcpy_s(char_array, str_name.c_str());
-    strcpy_s(char_array, sizeof(char_array), str_name.c_str());
-    m_name = char_array; 
+    m_name = "perc" + std::to_string(perc);
 }
