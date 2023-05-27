@@ -66,9 +66,10 @@ bool vector<T>::erase(size_t len_indexes, int *indexes) {
 // delete all elements and clear allocated memory and allocate new region
 template <typename T>
 bool vector<T>::clear() {
-    for (size_t i = 0; i < m_cap; ++i) {
-        erase(0);
-    }
+    delete [] m_data;                         // delete old memory region
+    m_data = new T[0];                        // allocate new empty region
+    m_cap = 0;                                // update size and capacity
+    m_size = 0;
     return true;
 }
 

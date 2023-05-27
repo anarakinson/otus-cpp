@@ -47,7 +47,7 @@ public:
     size_t size() const { return m_size; }                   // return size of list (number of nodes)
 
 private:
-    int m_size = 0;                                          // size of list (number of nodes)
+    size_t m_size = 0;                                          // size of list (number of nodes)
     Node<T> *m_begin = nullptr;                              // pointer to the first node
     Node<T> *m_end = nullptr;                                // pointer to the last node
 };

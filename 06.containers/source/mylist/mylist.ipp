@@ -11,6 +11,7 @@ bool list<T>::push_back(T value) {
         m_begin->set_next(m_end);                // and vice versa
     } else {
         node->set_previous(m_end);               // set pointer from new node to last member
+        node->set_next(nullptr);
         m_end->set_next(node);                   // set pointer from last member to new node
         m_end = node;                            // make new node the last one
     }
@@ -34,6 +35,7 @@ bool list<T>::insert(T value, int index) {
     node->set_previous(prev_node);                // insert new node between finded node and previous one
     node->set_next(next_node);                    // and set pointers between every node
 
+    next_node->set_previous(node);
     if (prev_node != nullptr) {
         prev_node->set_next(node);
     } else {                                      // if finded node is the first one
@@ -51,9 +53,17 @@ Node<T> *list<T>::iterate(int index) const {
     if (m_begin == nullptr || index < 0 || index >= m_size) {
         throw std::out_of_range("Container index out of range");  // check if index is correct
     }
-    Node<T> *node = m_begin;
-    for (int i = 0; i < index; ++i) {            // iterate nodes until find the right one
-        node = node->next();
+    Node<T> *node;
+    if (index < (m_size / 2)) {                                   // if index less than middle - iterate from start
+        node = m_begin;
+        for (int i = 0; i < index; ++i) {                         // iterate nodes until find the right one
+            node = node->next();
+        }
+    } else {                                                      // if index bigger than middle - iterate from end to start 
+        node = m_end;
+        for (int i = m_size - 1; i > index; --i) {                // iterate nodes until find the right one
+            node = node->previous();
+        }
     }
     return node;
 }

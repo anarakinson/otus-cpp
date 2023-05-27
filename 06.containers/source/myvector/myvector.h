@@ -8,7 +8,7 @@ class vector : public container {
 public:
     vector(): m_size{0}, m_cap{0} {}
     ~vector() { 
-        clear();
+        delete [] m_data;
         std::cout << "VECTOR DESTRUCTED" << std::endl; 
     }                                                           // delete all elements and clear allocated memory on destruction
     
