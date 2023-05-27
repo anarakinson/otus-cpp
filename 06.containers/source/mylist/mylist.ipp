@@ -31,12 +31,12 @@ bool list<T>::insert(T value, int index) {
     Node<T> *node = new Node<T>{value};           // create new node
     Node<T> *next_node = iterate(index);          // find node by index
     Node<T> *prev_node = next_node->previous();   // find previous node
-
-    node->set_previous(prev_node);                // insert new node between finded node and previous one
-    node->set_next(next_node);                    // and set pointers between every node
-
-    next_node->set_previous(node);
-    if (prev_node != nullptr) {
+    
+                                                  // insert new node between finded node and previous one and set pointers between every node
+    node->set_previous(prev_node);                // previous <- new
+    node->set_next(next_node);                    // next <- new
+    next_node->set_previous(node);                // next -> new
+    if (prev_node != nullptr) {                   // previous -> new
         prev_node->set_next(node);
     } else {                                      // if finded node is the first one
         m_begin = node;                           // set new node as first
