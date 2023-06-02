@@ -3,9 +3,9 @@
 template <typename T>
 bool vector<T>::insert(const T &value, int index) {
     if (m_cap <= m_size) {                        // if vector is full
-        size_t addition = 10;
+        int addition = 10;
         if (m_cap < 20) { addition = m_cap / 2 + 1; }
-        T *new_data = new T[m_cap + addition];           // create new memory region
+        T *new_data = new T[m_cap + addition];    // create new memory region
         for (size_t i = 0; i < m_cap; ++i) {
             size_t idx = i;
             if (i >= index) { idx = i + 1; }
@@ -14,7 +14,7 @@ bool vector<T>::insert(const T &value, int index) {
         new_data[index] = value;                  // add new element
         delete [] m_data;                         // delete old memory region
         m_data = new_data;                        // update data
-        m_cap += addition;                                  // update capacity
+        m_cap += addition;                        // update capacity
     } else {                                      // if vector is not full
         for (size_t i = m_size; i > index; --i) {
             size_t idx = i - 1;

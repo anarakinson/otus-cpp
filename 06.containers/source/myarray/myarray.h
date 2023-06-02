@@ -22,13 +22,13 @@ public:
     T operator [] (int index) const override;
     static_array &operator = (const static_array &other);
 
-    size_t size() const override { return m_last; }                             // return size of container
-    size_t capacity() const { return m_cap; }                                   // return allocated size
+    int size() const override { return m_last; }                             // return size of container
+    int capacity() const { return m_cap; }                                   // return allocated size
 
 private: 
     T data_[N];                                                                 // array to contain values
-    size_t m_last;                                                              // size of counter
-    size_t m_cap = N;                                                           // allocated size
+    int m_last;                                                              // size of counter
+    int m_cap = N;                                                           // allocated size
 
 };
 

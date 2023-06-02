@@ -28,13 +28,13 @@ public:
     T operator [] (int index) const override;
     vector &operator = (const vector &other);
 
-    size_t size() const override { return m_size; }                              // return vector real size
-    size_t capacity() const { return m_cap; }                                    // return vector memory allocated size
+    int size() const override { return m_size; }                              // return vector real size
+    int capacity() const { return m_cap; }                                    // return vector memory allocated size
 
 private:
     T *m_data = new T[0];                                                        // vector data
-    size_t m_size = 0;                                                           // vector real size
-    size_t m_cap = 0;                                                            // vector capacity
+    int m_size = 0;                                                           // vector real size
+    int m_cap = 0;                                                            // vector capacity
 };
 
 

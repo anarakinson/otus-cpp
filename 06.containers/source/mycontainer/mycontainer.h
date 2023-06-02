@@ -17,6 +17,6 @@ public:
 
     virtual T operator [] (int index) const { return {}; } 
 
-    virtual size_t size() const { return 0;}                                   // return size of list (number of nodes)
+    virtual int size() const { return 0;}                                   // return size of list (number of nodes)
 
 };
