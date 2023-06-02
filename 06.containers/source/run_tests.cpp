@@ -12,6 +12,8 @@ int main() {
     std::cout << "Test 0: Static array\n" << std::endl;
     static_array<double, 15> arr{};
     run_tests(arr);
+    arr.clear();
+    print_size(arr);
 
     print_separator();
 

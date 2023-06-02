@@ -1,4 +1,5 @@
 
+// add element to an arbitrary position (to the end by default)
 template <typename T, size_t N>
 bool static_array<T, N>::insert(const T &value, int index) {
     if (m_last >= m_cap) {
@@ -14,6 +15,7 @@ bool static_array<T, N>::insert(const T &value, int index) {
 }
 
 
+// erase element by index
 template <typename T, size_t N>
 bool static_array<T, N>::erase(const int index) {
     if (index >= m_last) {
@@ -29,6 +31,7 @@ bool static_array<T, N>::erase(const int index) {
 }
 
 
+// erase elements by array of indexes   
 template <typename T, size_t N>
 bool static_array<T, N>::erase(size_t len_indexes, int *indexes) {
     for (int j = 0; j < len_indexes; ++j) {
@@ -40,6 +43,31 @@ bool static_array<T, N>::erase(size_t len_indexes, int *indexes) {
 }
 
 
+// delete all elements and clear allocated memory
+template <typename T, size_t N>
+bool static_array<T, N>::clear() {            // set all data as 0
+    for (int i = 0; i < m_cap; ++i) {
+        data_[i] = 0;
+    }
+    m_last = 0;                               // update size
+    return true;
+}
+
+
+// copying constructor
+template <typename T, size_t N>
+static_array<T, N>::static_array(const static_array &other): m_last{0}, m_cap{other.capacity()} {
+    if (N != other.capacity()) {
+        std::cout << "Sizes not equal" << std::endl;
+        return;
+    }
+    for (int i = 0; i < other.size(); ++i) {
+        push_back(other[i]);
+    }
+}
+
+
+// operator [] overload
 template <typename T, size_t N>
 T static_array<T, N>::operator [] (int index) const {
     if (index < 0 || index >= m_last) {
@@ -49,3 +77,14 @@ T static_array<T, N>::operator [] (int index) const {
     }
     return data_[index];
 }  
+
+
+// operator = overload
+template <typename T, size_t N>
+static_array<T, N> &static_array<T, N>::operator = (const static_array<T, N> &other) {
+    clear();
+    for (int i = 0; i < other.size(); ++i) {
+        push_back(other[i]);
+    }
+    return *this;
+}

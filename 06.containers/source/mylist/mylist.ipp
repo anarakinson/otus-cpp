@@ -1,7 +1,7 @@
 
 // add element to an arbitrary position (to the end by default)
 template <typename T>
-bool list<T>::push_back(T value) {
+bool list<T>::push_back(const T &value) {
     Node<T> *node = new Node<T>{value};          // create new node
     if (m_begin == nullptr) {                    // if list empty - just add node
         m_begin = node;   
@@ -22,7 +22,7 @@ bool list<T>::push_back(T value) {
 
 // add element to an arbitrary position (to the end by default)
 template <typename T>
-bool list<T>::insert(T value, int index) {
+bool list<T>::insert(const T &value, int index) {
     if (m_begin == nullptr || index == size()) {  // if list is empty - just push_back or insert to the end
         push_back(value);
         return true;
@@ -124,6 +124,8 @@ bool list<T>::clear() {
         }
         m_begin = node;                                   // set current node as first
     }
+    m_begin = nullptr;
+    m_end = nullptr;
     return true;
 }
 
@@ -139,4 +141,15 @@ T list<T>::operator [] (int index) const {
     Node<T> *node = iterate(index);                // iterate nodes until find the right one
     T data = node->data();                         // get stored value
     return data;
+}
+
+
+// operator [] overload
+template <typename T>
+list<T> &list<T>::operator = (const list<T> &other) {             
+    clear();
+    for (int i = 0; i < other.size(); ++i) {
+        push_back(other[i]);
+    }
+    return *this;
 }
