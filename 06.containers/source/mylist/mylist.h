@@ -49,7 +49,7 @@ public:
     bool erase(size_t len_indexes, int *indexes);                            // erase elements by array of indexes
     bool clear();                                                            // delete all elements and clear allocated memory
 
-    T operator [] (int index) const;  
+    T operator [] (int index) const override;  
     list &operator = (const list &other);
     
     size_t size() const override { return m_size; }                          // return size of list (number of nodes)

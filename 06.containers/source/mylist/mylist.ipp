@@ -153,3 +153,6 @@ list<T> &list<T>::operator = (const list<T> &other) {
     }
     return *this;
 }
+
+
+// iterator

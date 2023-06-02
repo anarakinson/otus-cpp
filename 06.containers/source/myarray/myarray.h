@@ -19,7 +19,7 @@ public:
     bool erase(size_t len_indexes, int *indexes);                               // erase elements by array of indexes    
     bool clear();                                                               // delete all elements and clear allocated memory
 
-    T operator [] (int index) const;
+    T operator [] (int index) const override;
     static_array &operator = (const static_array &other);
 
     size_t size() const override { return m_last; }                             // return size of container
