@@ -42,8 +42,6 @@ public:
     bool push_forward(const T &value) override { return insert(value, 0); }  // add element to the start of list
 
     Node<T> *iterate(int index) const;                                       // iterate elements of the list
-    // Node<T> *begin() const { return m_begin; }
-    // Node<T> *end() const { return m_end; }
 
     bool erase(int index) override;                                          // erase element by index
     bool erase(size_t len_indexes, int *indexes);                            // erase elements by array of indexes
