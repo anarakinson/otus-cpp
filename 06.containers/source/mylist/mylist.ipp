@@ -159,11 +159,19 @@ list<T> &list<T>::operator = (const list<T> &other) {
 template <typename T>
 list<T> &list<T>::operator = (list<T> &&other) {             
     clear();
-    for (int i = 0; i < other.size(); ++i) {
-        push_back(other[i]);
-    }
-    other.clear();
+    m_begin = other.begin();
+    m_end = other.end();
+    m_size = other.size();
+    other.oblive();
+
     return *this;
 }
 
 
+// erase all info from list without erasing elements
+template <typename T>
+void list<T>::oblive() {
+    m_begin = nullptr;
+    m_end = nullptr;
+    m_size = 0;
+}
