@@ -9,6 +9,7 @@ class static_array : public container<T> {
 public:
     static_array(): m_last{0}, m_cap{N} {}
     static_array(const static_array &other);                                    // copying constructor
+    static_array(static_array &&other);                                         // moving constructor
     ~static_array() { std::cout << "ARRAY DESTRUCTED" << std::endl; }
 
     bool insert(const T &value, int index) override;                            // add element to an arbitrary position (to the end by default)
@@ -21,12 +22,13 @@ public:
 
     T operator [] (int index) const override;
     static_array &operator = (const static_array &other);
+    static_array &operator = (static_array &&other);
 
     int size() const override { return m_last; }                             // return size of container
     int capacity() const { return m_cap; }                                   // return allocated size
 
 private: 
-    T data_[N];                                                                 // array to contain values
+    T data_[N];                                                              // array to contain values
     int m_last;                                                              // size of counter
     int m_cap = N;                                                           // allocated size
 

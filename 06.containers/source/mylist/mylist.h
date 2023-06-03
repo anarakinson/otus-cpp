@@ -32,6 +32,12 @@ public:
             push_back(other[i]);
         }
     }
+    list(list &&other) {                                                     // moving constructor
+        for (int i = 0; i < other.size(); i++) {
+            push_back(other[i]);
+        }
+        other.clear();
+    }
     ~list() {                                                                // destructor
         clear(); 
         std::cout << "LIST DESTRUCTED" << std::endl; 
@@ -49,6 +55,7 @@ public:
 
     T operator [] (int index) const override;  
     list &operator = (const list &other);
+    list &operator = (list &&other);
     
     int size() const override { return m_size; }                          // return size of list (number of nodes)
 

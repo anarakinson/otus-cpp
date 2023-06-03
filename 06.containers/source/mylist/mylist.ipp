@@ -144,7 +144,7 @@ T list<T>::operator [] (int index) const {
 }
 
 
-// operator [] overload
+// operator = overload
 template <typename T>
 list<T> &list<T>::operator = (const list<T> &other) {             
     clear();
@@ -155,4 +155,15 @@ list<T> &list<T>::operator = (const list<T> &other) {
 }
 
 
-// iterator
+// operator = overload
+template <typename T>
+list<T> &list<T>::operator = (list<T> &&other) {             
+    clear();
+    for (int i = 0; i < other.size(); ++i) {
+        push_back(other[i]);
+    }
+    other.clear();
+    return *this;
+}
+
+

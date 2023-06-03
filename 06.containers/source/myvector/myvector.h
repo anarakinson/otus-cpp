@@ -12,6 +12,12 @@ public:
             push_back(other[i]);
         }
     }
+    vector(vector &&other) {                                                     // moving constructor
+        for (int i = 0; i < other.size(); ++i) {
+            push_back(other[i]);
+        }
+        other.clear();
+    }
     ~vector() { 
         delete [] m_data;
         std::cout << "VECTOR DESTRUCTED" << std::endl; 
@@ -27,6 +33,7 @@ public:
 
     T operator [] (int index) const override;
     vector &operator = (const vector &other);
+    vector &operator = (vector &&other);
 
     int size() const override { return m_size; }                              // return vector real size
     int capacity() const { return m_cap; }                                    // return vector memory allocated size

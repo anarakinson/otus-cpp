@@ -67,6 +67,20 @@ static_array<T, N>::static_array(const static_array &other): m_last{0}, m_cap{ot
 }
 
 
+// moving constructor
+template <typename T, size_t N>
+static_array<T, N>::static_array(static_array &&other): m_last{0}, m_cap{other.capacity()} {
+    if (N != other.capacity()) {
+        std::cout << "Sizes not equal" << std::endl;
+        return;
+    }
+    for (int i = 0; i < other.size(); ++i) {
+        push_back(other[i]);
+    }
+    other.clear();
+}
+
+
 // operator [] overload
 template <typename T, size_t N>
 T static_array<T, N>::operator [] (int index) const {
@@ -79,12 +93,24 @@ T static_array<T, N>::operator [] (int index) const {
 }  
 
 
-// operator = overload
+// copying operator = overload
 template <typename T, size_t N>
 static_array<T, N> &static_array<T, N>::operator = (const static_array<T, N> &other) {
     clear();
     for (int i = 0; i < other.size(); ++i) {
         push_back(other[i]);
     }
+    return *this;
+}
+
+
+// moving operator = overload
+template <typename T, size_t N>
+static_array<T, N> &static_array<T, N>::operator = (static_array<T, N> &&other) {
+    clear();
+    for (int i = 0; i < other.size(); ++i) {
+        push_back(other[i]);
+    }
+    other.clear();
     return *this;
 }

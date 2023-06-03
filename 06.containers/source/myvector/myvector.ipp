@@ -88,12 +88,24 @@ T vector<T>::operator [] (int index) const {
 }  
 
 
-// operator [] overload
+// operator = overload
 template <typename T>
 vector<T> &vector<T>::operator = (const vector<T> &other) {             
     clear();
     for (int i = 0; i < other.size(); ++i) {
         push_back(other[i]);
     }
+    return *this;
+}
+
+
+// moving operator = overload
+template <typename T>
+vector<T> &vector<T>::operator = (vector<T> &&other) {             
+    clear();
+    for (int i = 0; i < other.size(); ++i) {
+        push_back(other[i]);
+    }
+    other.clear();
     return *this;
 }

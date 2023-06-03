@@ -105,10 +105,21 @@ void run_tests(T &container) {
     std::cout << std::endl;
 
     /* ---- *** ----- */
-    std::cout << "Operator = :" << std::endl;
+    std::cout << "Copy operator = :" << std::endl;
     container = container2;
     print_container(container);
     print_size(container);
+    std::cout << std::endl;
+
+    /* ----- *** ----- */
+    std::cout << "Move operator = :" << std::endl;
+    container = std::move(container2);
+    print_container(container);
+
+    std::cout << "First container ";
+    print_size(container);
+    std::cout << "Second container ";
+    print_size(container2);
     std::cout << std::endl;
 
 }
