@@ -103,9 +103,18 @@ vector<T> &vector<T>::operator = (const vector<T> &other) {
 template <typename T>
 vector<T> &vector<T>::operator = (vector<T> &&other) {             
     clear();
-    for (int i = 0; i < other.size(); ++i) {
-        push_back(other[i]);
-    }
-    other.clear();
+    m_data = other.data();
+    m_size = other.size();
+    m_cap = other.capacity();
+    other.oblive();
     return *this;
+}
+
+
+// erase all info from list without erasing elements
+template <typename T>
+void vector<T>::oblive() {
+    m_data = new T[0];
+    m_size = 0;
+    m_cap = 0;
 }

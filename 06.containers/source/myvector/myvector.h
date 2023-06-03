@@ -13,10 +13,9 @@ public:
         }
     }
     vector(vector &&other) {                                                     // moving constructor
-        for (int i = 0; i < other.size(); ++i) {
-            push_back(other[i]);
-        }
-        other.clear();
+        m_data = other.data();
+        m_size = other.size();
+        other.oblive();
     }
     ~vector() { 
         delete [] m_data;
@@ -30,6 +29,7 @@ public:
     bool erase(int index) override;                                                       // erase element by index
     bool erase(size_t len_indexes, int *indexes);                                // erase elements by array of indexes
     bool clear();                                                                // delete all elements and clear allocated memory
+    void oblive();
 
     T operator [] (int index) const override;
     vector &operator = (const vector &other);
@@ -37,9 +37,10 @@ public:
 
     int size() const override { return m_size; }                              // return vector real size
     int capacity() const { return m_cap; }                                    // return vector memory allocated size
+    T *data() { return m_data; }
 
 private:
-    T *m_data = new T[0];                                                        // vector data
+    T *m_data = new T[0];                                                     // vector data
     int m_size = 0;                                                           // vector real size
     int m_cap = 0;                                                            // vector capacity
 };

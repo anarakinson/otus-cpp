@@ -50,20 +50,20 @@ public:
     Node<T> *iterate(int index) const;                                       // iterate elements of the list
     Node<T> *begin() { return m_begin; }
     Node<T> *end() { return m_end; }
-    void oblive();                                                           // erase all info from list without erasing elements
 
     bool erase(int index) override;                                          // erase element by index
     bool erase(size_t len_indexes, int *indexes);                            // erase elements by array of indexes
     bool clear();                                                            // delete all elements and clear allocated memory
+    void oblive();                                                           // erase all info from list without erasing elements
 
     T operator [] (int index) const override;  
     list &operator = (const list &other);
     list &operator = (list &&other);
     
-    int size() const override { return m_size; }                          // return size of list (number of nodes)
+    int size() const override { return m_size; }                             // return size of list (number of nodes)
 
 private:
-    int m_size = 0;                                                       // size of list (number of nodes)
+    int m_size = 0;                                                          // size of list (number of nodes)
     Node<T> *m_begin = nullptr;                                              // pointer to the first node
     Node<T> *m_end = nullptr;                                                // pointer to the last node
 };
