@@ -114,7 +114,7 @@ bool list<T>::clear() {
     }
     Node<T> *node = m_begin;                              // start from begin
     while (true) {
-        Node<T> *node = m_begin->next();                  // get next node and delete current
+        node = m_begin->next();                  // get next node and delete current
         delete m_begin;
         m_size--;                                         // update size
         if (node == m_end) {                              // if current node is the last one

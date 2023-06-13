@@ -7,24 +7,27 @@
 #include <iostream>
 
 
-TEST(List, DISABLED_Success) {
+// DISABLED_
+TEST(List, Success) {
     // Arrange
     std::cout << ">>> START TESTS <<<" << std::endl;
 
-    const size_t expectedZeroSize = 0;
+    const int expectedZeroSize = 0;
+
+    list<int> lst{};
 
     // Assert
-    EXPECT_EQ(0, expectedZeroSize);
-    EXPECT_TRUE(!true);
+    EXPECT_EQ(lst.size(), expectedZeroSize);
+    EXPECT_TRUE(true);
 
-    // list.push_back(1);
-    // const size_t expectedSize = 1;
+    lst.push_back(1);
+    const size_t expectedSize = 1;
 
-    // EXPECT_NE(list.size(), expectedZeroSize);
-    // EXPECT_EQ(list.size(), expectedSize);
+    EXPECT_NE(lst.size(), expectedZeroSize);
+    EXPECT_EQ(lst.size(), expectedSize);
 
-    // EXPECT_LE(list.size(), expectedSize);
-    // EXPECT_GE(list.size(), expectedSize);
+    EXPECT_LE(lst.size(), expectedSize);
+    EXPECT_GE(lst.size(), expectedSize);
 }
 
 
