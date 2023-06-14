@@ -44,7 +44,7 @@ public:
     }                                                                        // delete all elements and clear allocated memory on destruction
 
     bool push_back(const T &value) override;                                 // add element to the end of list
-    bool insert(const T &value, int index = size() - 1) override;                // add element to an arbitrary position (to the end by default)
+    bool insert(const T &value, int index = size() - 1) override;            // add element to an arbitrary position (to the end by default)
     bool push_forward(const T &value) override { return insert(value, 0); }  // add element to the start of list
 
     Node<T> *iterate(int index) const;                                       // iterate elements of the list
