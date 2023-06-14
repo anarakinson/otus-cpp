@@ -45,11 +45,11 @@ bool list<T>::insert(const T &value, int index) {
     if (prev_node != nullptr) {                   // previous -> new
         prev_node->set_next(node);
     } else {                                      // if finded node is the first one
-        m_begin = node;                           // set new node as first
+        m_begin = node;                           // set new node as the "begin"
         m_begin->set_previous(nullptr);
     }
 
-    if (next_node->next() == nullptr) {
+    if (next_node->next() == nullptr) {           // if node following next is the last - set it as the "end"
         m_end = next_node;
         m_end->set_next(nullptr);
     } 
