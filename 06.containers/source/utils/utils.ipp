@@ -57,7 +57,7 @@ void run_tests(T &container) {
     /* ----- *** ----- */
     std::cout << "Push back '32':" << std::endl;
     
-    container.insert(32, container.size());
+    container.insert(32, container.size() - 1);
     print_container(container);
     std::cout << std::endl;
 
@@ -98,7 +98,7 @@ void run_tests(T &container) {
     container.insert(22, (container.size() / 2));
     container.insert(23, (container.size() / 2) - 1);
     container.insert(24, 0);
-    container.insert(25, container.size());
+    container.insert(25, container.size() - 1);
     container.insert(26, 4);
     print_container(container);
     print_size(container);
@@ -120,6 +120,15 @@ void run_tests(T &container) {
     print_size(container);
     std::cout << "Second container ";
     print_size(container2);
+    std::cout << std::endl;
+
+    /* ----- *** ----- */
+    std::cout << "Fill container from backwarts: " << std::endl;
+    container.clear();
+    for (int i = 0; i < 10; ++i) {
+        container.insert(i, 0);
+    }
+    print_container(container);
     std::cout << std::endl;
 
 }

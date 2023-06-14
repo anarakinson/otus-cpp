@@ -3,15 +3,16 @@
 template <typename T>
 bool list<T>::push_back(const T &value) {
     Node<T> *node = new Node<T>{value};          // create new node
+    node->set_next(nullptr);
     if (m_begin == nullptr) {                    // if list empty - just add node
-        m_begin = node;   
+        m_begin = node;
+        m_begin->set_previous(nullptr);   
     } else if (m_end == nullptr) {               // if list have only one node
         m_end = node;                            // add node to the end of list
         m_end->set_previous(m_begin);            // set pointer from last member to first
         m_begin->set_next(m_end);                // and vice versa
     } else {
         node->set_previous(m_end);               // set pointer from new node to last member
-        node->set_next(nullptr);
         m_end->set_next(node);                   // set pointer from last member to new node
         m_end = node;                            // make new node the last one
     }
@@ -23,7 +24,12 @@ bool list<T>::push_back(const T &value) {
 // add element to an arbitrary position (to the end by default)
 template <typename T>
 bool list<T>::insert(const T &value, int index) {
-    if (m_begin == nullptr || index == size()) {  // if list is empty - just push_back or insert to the end
+    if (index > size()) { 
+        // throw std::out_of_range("Container index out of range");  // check if index is correct
+        std::cout << "Container index out of range" << std::endl;
+        return false; 
+    }
+    if (m_begin == nullptr || (index == size() - 1 && m_begin != nullptr && size() > 1)) {  // if list is empty - just push_back or insert to the end
         push_back(value);
         return true;
     }
@@ -40,7 +46,13 @@ bool list<T>::insert(const T &value, int index) {
         prev_node->set_next(node);
     } else {                                      // if finded node is the first one
         m_begin = node;                           // set new node as first
+        m_begin->set_previous(nullptr);
     }
+
+    if (next_node->next() == nullptr) {
+        m_end = next_node;
+        m_end->set_next(nullptr);
+    } 
 
     m_size++;                                     // update size
     return true;
@@ -54,17 +66,18 @@ Node<T> *list<T>::iterate(int index) const {
         throw std::out_of_range("Container index out of range");  // check if index is correct
     }
     Node<T> *node;
-    if (index < (m_size / 2)) {                                   // if index less than middle - iterate from start
-        node = m_begin;
-        for (int i = 0; i < index; ++i) {                         // iterate nodes until find the right one
-            node = node->next();
-        }
-    } else {                                                      // if index bigger than middle - iterate from end to start 
+    if (index > (m_size / 2)) {                                   // if index less than middle - iterate from start
         node = m_end;
         for (int i = m_size - 1; i > index; --i) {                // iterate nodes until find the right one
             node = node->previous();
         }
+    } else {                                                      // if index bigger than middle - iterate from end to start 
+        node = m_begin;
+        for (int i = 0; i < index; ++i) {                         // iterate nodes until find the right one
+            node = node->next();
+        }
     }
+
     return node;
 }
 
