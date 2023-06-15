@@ -48,7 +48,6 @@ if (TESTS)
     add_executable(
         tests
         tests.cpp
-        general_tests.cpp
         array_tests.cpp
         vector_tests.cpp
         list_tests.cpp

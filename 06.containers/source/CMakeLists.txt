@@ -21,3 +21,16 @@ set_target_properties(container
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
+
+# set compile options
+if (MSVC)
+    target_compile_options(
+        container PRIVATE
+        /W4
+    )
+else ()
+    target_compile_options(
+        container PRIVATE
+        -Wall -Wextra -pedantic -Werror
+    )
+endif()
