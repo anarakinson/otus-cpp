@@ -2,21 +2,21 @@
 // add element to an arbitrary position (to the end by default)
 template <typename T>
 bool list<T>::push_back(const T &value) {
-    Node<T> *node = new Node<T>{value};          // create new node
+    Node<T> *node = new Node<T>{value};            // create new node
     node->set_next(nullptr);
-    if (m_begin == nullptr) {                    // if list empty - just add node
+    if (m_begin == nullptr) {                      // if list empty - just add node
         m_begin = node;
         m_begin->set_previous(nullptr);   
-    } else if (m_end == nullptr) {               // if list have only one node
-        m_end = node;                            // add node to the end of list
-        m_end->set_previous(m_begin);            // set pointer from last member to first
-        m_begin->set_next(m_end);                // and vice versa
+    } else if (m_end == nullptr) {                 // if list have only one node
+        m_end = node;                              // add node to the end of list
+        m_end->set_previous(m_begin);              // set pointer from last member to first
+        m_begin->set_next(m_end);                  // and vice versa
     } else {
-        node->set_previous(m_end);               // set pointer from new node to last member
-        m_end->set_next(node);                   // set pointer from last member to new node
-        m_end = node;                            // make new node the last one
+        node->set_previous(m_end);                 // set pointer from new node to last member
+        m_end->set_next(node);                     // set pointer from last member to new node
+        m_end = node;                              // make new node the last one
     }
-    m_size++;                                    // update size 
+    m_size++;                                      // update size 
     return true;
 }
 
@@ -29,32 +29,32 @@ bool list<T>::insert(const T &value, int index) {
         std::cout << "Container index out of range" << std::endl;
         return false; 
     }
-    if (m_begin == nullptr || (index == size() - 1 && m_begin != nullptr && size() > 1)) {  // if list is empty - just push_back or insert to the end
+    if (m_begin == nullptr || (index == size() - 1 && size() > 1)) {  // if list is empty - just push_back or insert to the end
         push_back(value);
         return true;
     }
 
-    Node<T> *node = new Node<T>{value};           // create new node
-    Node<T> *next_node = iterate(index);          // find node by index
-    Node<T> *prev_node = next_node->previous();   // find previous node
+    Node<T> *node = new Node<T>{value};             // create new node
+    Node<T> *next_node = iterate(index);            // find node by index
+    Node<T> *prev_node = next_node->previous();     // find previous node
     
-                                                  // insert new node between finded node and previous one and set pointers between every node
-    node->set_previous(prev_node);                // previous <- new
-    node->set_next(next_node);                    // next <- new
-    next_node->set_previous(node);                // next -> new
-    if (prev_node != nullptr) {                   // previous -> new
+                                                    // insert new node between finded node and previous one and set pointers between every node
+    node->set_previous(prev_node);                  // previous <- new
+    node->set_next(next_node);                      // next <- new
+    next_node->set_previous(node);                  // next -> new
+    if (prev_node != nullptr) {                     // previous -> new
         prev_node->set_next(node);
-    } else {                                      // if finded node is the first one
-        m_begin = node;                           // set new node as the "begin"
+    } else {                                        // if finded node is the first one
+        m_begin = node;                             // set new node as the "begin"
         m_begin->set_previous(nullptr);
     }
 
-    if (next_node->next() == nullptr) {           // if node following next is the last - set it as the "end"
+    if (next_node->next() == nullptr) {             // if node following next is the last - set it as the "end"
         m_end = next_node;
         m_end->set_next(nullptr);
     } 
 
-    m_size++;                                     // update size
+    m_size++;                                       // update size
     return true;
 }
 
@@ -85,11 +85,11 @@ Node<T> *list<T>::iterate(int index) const {
 // erase element by index
 template <typename T>
 bool list<T>::erase(int index) {
-    Node<T> *node = iterate(index);               // iterate nodes until find the right one
-    Node<T> *prev_node = node->previous();        // find next and previous nodes
+    Node<T> *node = iterate(index);                 // iterate nodes until find the right one
+    Node<T> *prev_node = node->previous();          // find next and previous nodes
     Node<T> *next_node = node->next();
     
-    if (prev_node != nullptr) {                   // set pointers from previous to next and vice versa
+    if (prev_node != nullptr) {                     // set pointers from previous to next and vice versa
         prev_node->set_next(next_node);
     } else {
         m_begin = next_node;
@@ -99,8 +99,8 @@ bool list<T>::erase(int index) {
     } else {
         m_end = prev_node;
     }
-    delete node;                                   // delete finded node
-    m_size--;                                      // update size
+    delete node;                                     // delete finded node
+    m_size--;                                        // update size
     return true;
 }
 
@@ -127,7 +127,7 @@ bool list<T>::clear() {
     }
     Node<T> *node = m_begin;                              // start from begin
     while (true) {
-        node = m_begin->next();                  // get next node and delete current
+        node = m_begin->next();                           // get next node and delete current
         delete m_begin;
         m_size--;                                         // update size
         if (node == m_end) {                              // if current node is the last one
@@ -151,8 +151,8 @@ T list<T>::operator [] (int index) const {
         std::cout << "Container index out of range" << std::endl;
         return {};
     }
-    Node<T> *node = iterate(index);                // iterate nodes until find the right one
-    T data = node->data();                         // get stored value
+    Node<T> *node = iterate(index);                       // iterate nodes until find the right one
+    T data = node->data();                                // get stored value
     return data;
 }
 
