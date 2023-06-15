@@ -111,7 +111,7 @@ TEST(Vector, Moving_Constructor) {
 
 
 // 4 test
-TEST(Vector, Expected_Sequence_Push_Back) {
+TEST(Vector, Expected_Sequence_Push_Back) {                           // Push back values nd assert it
     // Arrange
     int expected_sequence[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     vector<int> vec{};
@@ -124,14 +124,14 @@ TEST(Vector, Expected_Sequence_Push_Back) {
     
     // Assert
     for (int i = 0; i < vec.size(); ++i) {
-        EXPECT_EQ(vec[i], expected_sequence[i]);                          // Equal element        
+        EXPECT_EQ(vec[i], expected_sequence[i]);                         // Equal element        
     }
 
 }
 
 
 // 5 test
-TEST(Vector, Expected_Sequence_Push_Forward) {
+TEST(Vector, Expected_Sequence_Push_Forward) {                           // Push forward values nd assert it
     // Arrange
     int expected_sequence[10] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
     vector<int> vec{};
