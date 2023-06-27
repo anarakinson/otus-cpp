@@ -3,30 +3,15 @@ import os
 from typing import List
 
 
-# fmt:off
-#
-# Let's assume the module was build by CMake commands in the project root
-# on Linux-like system:
-#
-#   cmake -B ./build && cmake --build ./build
-#
-# in this case our new-created Python module `pyfibonacci` will be placed in
-# the dir `./build/cpp/`.
-#
-# Adding this path to the module search path list (replace "../build/cpp" if
-# you built or put the module to another path):
+# Adding path to the module search path list 
 module_dir = os.path.dirname(os.path.abspath(__file__))
 project_root_dir = os.path.dirname(module_dir)
-# module_path = os.path.join(project_root_dir, "build", "cpp", "Debug")
-module_path = os.path.join(project_root_dir, "build", "cpp", "pyfibonacci.dir", "Debug")
+module_path = os.path.join(project_root_dir, "build", "cpp", "Debug")
 
 sys.path.append(module_path)
-sys.path.append(r"D:\coding\Atom\cpp\OTUS\libraries_reference\python_lib\build\cpp\pyfibonacci.dir\Debug")
-sys.path.append(r"D:\coding\Atom\cpp\OTUS\libraries_reference\python_lib\build\cpp\Debug")
 
 # Importing out module:
 import pyfibonacci
-# fmt:on
 
 
 the_answer = pyfibonacci.the_answer
@@ -36,8 +21,6 @@ what = pyfibonacci.what
 def calc(index: int) -> int:
     if index <= 1:
         return index
-
-    # return calc(index - 1) + calc(index - 2)
 
     a = 1
     b = 0
