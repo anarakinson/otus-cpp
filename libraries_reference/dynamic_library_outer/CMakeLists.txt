@@ -35,6 +35,6 @@ target_link_libraries(
 
 add_custom_target(
     copy_dll
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/dynamic_lib/dynamic_lib.dll ${CMAKE_BINARY_DIR}/app/dynamic_lib.dll
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/dynamic_lib/dynamic_lib.dll ${CMAKE_BINARY_DIR}/app/Debug/dynamic_lib.dll
 )
 add_dependencies(main copy_dll)
