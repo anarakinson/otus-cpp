@@ -58,7 +58,7 @@ int main() {
   john = mary;
   // swap(john, mary);
 
-  std::cout << john << std::endl;
-  std::cout << mary << std::endl;
+  std::cout << "john: \n" << john << std::endl;
+  std::cout << "mary: \n" << mary << std::endl;
 
 }
