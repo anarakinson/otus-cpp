@@ -8,7 +8,10 @@ public:
     SmartPtr() noexcept = default;
     SmartPtr(T *ptr) noexcept: m_ptr{ptr} {}
 
-    ~SmartPtr() { reset(); }
+    ~SmartPtr() { 
+        reset(); 
+        std::cout << "DESTRUCTED" << std::endl;
+    }
 
     // Not copyable
     SmartPtr(const SmartPtr<T> &other) = delete;
