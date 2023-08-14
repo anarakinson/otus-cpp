@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include <iomanip>
 #include <cctype>
@@ -73,20 +74,21 @@ std::string tolower(const std::string &str) {
 };
 
 
-Counter count_parallel(std::string &filename, int num_threads, int step) {
+Counter count_parallel(std::string &input, int num_threads, int step) {
     
-    std::ifstream input{filename};
-    if (!input.is_open()) {
-        throw std::runtime_error{"Failed to open '" + filename + "'\n"};
-    }
-
     Counter counter;
-
     long long cnt = step;
+
+    std::istringstream stream(input);
+    std::string line;
     std::string word;
-    while (input >> word) {
+
+    while (std::getline(stream, line, '\n')) {
+        std::istringstream stream(line);
         if (cnt % num_threads == 0) {
-            [&counter](const std::string &s) { ++counter[tolower(s)]; } (word);
+            while (std::getline(stream, word, ' ')) {
+                [&counter](const std::string &s) { ++counter[tolower(s)]; } (word);
+            }
         }
         ++cnt;
     }
@@ -100,13 +102,27 @@ void count_words(std::string &filename, Counter& counter, int num_threads) {
 
     std::vector<std::future<Counter>> threads{};
 
+    std::ifstream input{filename};
+    if (!input.is_open()) {
+        throw std::runtime_error{"Failed to open '" + filename + "'\n"};
+    }
+
+    // std::ifstream in_file{filename};       //open the input file
+    // std::stringstream stream;
+    // stream << in_file.rdbuf();             //read the file
+    // std::string str = stream.str();        //str holds the content of the file
+
+    std::string str;
+    std::getline(std::ifstream(filename), str, '\0');
+
+
     for (int i = 0; i < num_threads; ++i) {
 
         threads.emplace_back(
             std::async(
                 std::launch::async,
                 count_parallel,             
-                filename,
+                std::ref(str),
                 num_threads,
                 i
             )
