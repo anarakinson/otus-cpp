@@ -74,69 +74,67 @@ std::string tolower(const std::string &str) {
 };
 
 
-Counter count_parallel(std::string &input, int num_threads, int step) {
-    
-    Counter counter;
-    long long cnt = step;
 
-    std::istringstream stream(input);
-    std::string line;
-    std::string word;
 
-    while (std::getline(stream, line, '\n')) {
-        std::istringstream stream(line);
+Counter count_parallel(std::string &file_path, int step, int num_threads) {
+
+    std::ifstream stream{file_path};
+    if (!stream.is_open()) {
+        throw std::runtime_error{"Failed to open '" + file_path + "'\n"};
+    }
+
+    Counter counter{};
+    std::istream_iterator<std::string> iterator{stream};
+    std::istream_iterator<std::string> last_word{};
+    if (step > 0 ) std::advance(iterator, step);
+
+    long long cnt = 0;
+    for (; iterator != last_word; ++iterator) {
         if (cnt % num_threads == 0) {
-            while (std::getline(stream, word, ' ')) {
-                [&counter](const std::string &s) { ++counter[tolower(s)]; } (word);
-            }
+            [&counter](const std::string &s) { ++counter[tolower(s)]; } (*iterator);
         }
         ++cnt;
     }
 
     return counter;
-
 }
 
 
-void count_words(std::string &filename, Counter& counter, int num_threads) {
+void count_words(std::string &file_path, Counter &counter, int num_threads) {
 
-    std::vector<std::future<Counter>> threads{};
-
-    std::ifstream input{filename};
-    if (!input.is_open()) {
-        throw std::runtime_error{"Failed to open '" + filename + "'\n"};
+    std::ifstream stream{file_path};
+    if (!stream.is_open()) {
+        throw std::runtime_error{"Failed to open '" + file_path + "'\n"};
     }
 
-    // std::ifstream in_file{filename};       //open the input file
-    // std::stringstream stream;
-    // stream << in_file.rdbuf();             //read the file
-    // std::string str = stream.str();        //str holds the content of the file
+    /* ---------------------------------------------------------------- */
 
-    std::string str;
-    std::getline(std::ifstream(filename), str, '\0');
-
+    std::vector<std::future<Counter>> tasks{};
 
     for (int i = 0; i < num_threads; ++i) {
-
-        threads.emplace_back(
+        tasks.push_back( 
             std::async(
-                std::launch::async,
-                count_parallel,             
-                std::ref(str),
-                num_threads,
-                i
+                std::launch::async, 
+                count_parallel,
+                std::ref(file_path),
+                i,
+                num_threads
             )
         );
     }
 
-    for (int i = 0; i < threads.size(); ++i) {
-        Counter result = threads[i].get();
-        for (auto &pair : result) {
+    for (int i = 0; i < tasks.size(); ++i) {
+        Counter future = tasks[i].get();
+        // Counter future = tasks[i];
+        for (auto &pair : future) {
             counter[pair.first] += pair.second;
         }
     }
 
+
+    /* ---------------------------------------------------------------- */
 }
+
 
 void print_topk(std::ostream& stream, const Counter& counter, const size_t k) {
     std::vector<Counter::const_iterator> words;
