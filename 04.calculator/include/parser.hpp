@@ -33,6 +33,6 @@ class Parser {
 
     bool problem = false;
     Lexer &lexer_;
-    Lexer::Token tok_;
+    Lexer::Token tok_ = Lexer::Token::None;
     Lexer::Token prev_tok_ = Lexer::Token::Number;
 };

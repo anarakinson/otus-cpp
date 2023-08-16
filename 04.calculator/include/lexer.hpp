@@ -15,6 +15,7 @@ class Lexer {
         Lbrace,
         Rbrace,
         Name,
+        None,
     };
 
     // initialization declaration
