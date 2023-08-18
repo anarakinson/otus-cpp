@@ -31,10 +31,10 @@ int main(int argc, char *argv[]) {
     auto start = std::chrono::high_resolution_clock::now();
     Counter freq_dict;
     std::vector<std::future<Counter>> threads{};
+    std::vector<Counter> counters(argc, Counter{});
     
     for (int i = 1; i < argc; ++i) {
-        Counter counter{};
-        threads.emplace_back(std::async(std::launch::async, count_words, std::string(argv[i]), counter));
+        threads.emplace_back(std::async(std::launch::async, count_words, std::string(argv[i]), counters[i]));
     }
 
     for (int i = 0; i < threads.size(); ++i) {

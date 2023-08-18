@@ -12,6 +12,11 @@ include_directories(
     include
 )
 
+
+find_package(Threads REQUIRED)
+target_link_libraries(topk_words Threads::Threads)
+
+
 set_target_properties(
     topk_words PROPERTIES 
     SXX_STANDARD 17
