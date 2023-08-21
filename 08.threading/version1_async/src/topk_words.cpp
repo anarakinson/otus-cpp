@@ -18,7 +18,7 @@ using Counter = std::map<std::string, std::size_t>;
 
 std::string tolower(const std::string &str);
 
-Counter count_words(std::string filename, Counter&);
+Counter count_words(std::string filename);
 
 void print_topk(std::ostream& stream, const Counter&, const size_t k);
 
@@ -31,10 +31,9 @@ int main(int argc, char *argv[]) {
     auto start = std::chrono::high_resolution_clock::now();
     Counter freq_dict;
     std::vector<std::future<Counter>> threads{};
-    std::vector<Counter> counters(argc, Counter{});
     
     for (int i = 1; i < argc; ++i) {
-        threads.emplace_back(std::async(std::launch::async, count_words, std::string(argv[i]), counters[i]));
+        threads.emplace_back(std::async(std::launch::async, count_words, std::string(argv[i])));
     }
 
     for (int i = 0; i < threads.size(); ++i) {
@@ -59,8 +58,9 @@ std::string tolower(const std::string &str) {
     return lower_str;
 };
 
-Counter count_words(std::string filename, Counter& counter) {
+Counter count_words(std::string filename) {
 
+    Counter counter{};
     std::ifstream input{filename};
     if (!input.is_open()) {
         std::cerr << "Failed to open file " << filename << '\n';
